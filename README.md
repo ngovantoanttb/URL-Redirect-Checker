@@ -1,5 +1,11 @@
+#URL Redirect Checker
+#Install
+```cmd
 npm init -y
 npm install express axios
-NPM install puppeteer
-##Run
-node server.js
+npm install puppeteer
+```
+Run code
+
+    node server.js
+

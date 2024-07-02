@@ -9,7 +9,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Hàm sử dụng Puppeteer để lấy địa chỉ URL đích
 async function getRedirectUrl(url) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+    args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--disable-gpu',
+        '--window-size=1920x1080',
+        '--disable-notifications',
+        '--disable-web-security',
+        '--disable-infobars',
+        '--start-fullscreen',
+        '--no-first-run',
+        '--hide-scrollbars',
+        '--disable-extensions',
+        // Thêm cấu hình User-Agent tại đây nếu cần thiết
+    ]
+    });
+    
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle0' });
 

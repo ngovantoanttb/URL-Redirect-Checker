@@ -1,5 +1,6 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
+const axios = require('axios');
 const path = require('path');
 const app = express();
 const port = 3000;
@@ -12,22 +13,22 @@ async function getRedirectUrl(url) {
     // const proxy = 'http://proxy.example.com:8080'; // Địa chỉ proxy và cổng
 
     const browser = await puppeteer.launch({
-        // args: [
-        //     `--proxy-server=${proxy}`,
-        //     '--no-sandbox',
-        //     '--disable-setuid-sandbox',
-        //     '--disable-dev-shm-usage',
-        //     '--disable-accelerated-2d-canvas',
-        //     '--disable-gpu',
-        //     '--window-size=1920x1080',
-        //     '--disable-notifications',
-        //     '--disable-web-security',
-        //     '--disable-infobars',
-        //     '--start-fullscreen',
-        //     '--no-first-run',
-        //     '--hide-scrollbars',
-        //     '--disable-extensions'
-        // ]
+        args: [
+            `--proxy-server=${proxy}`,
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--disable-gpu',
+            '--window-size=1920x1080',
+            '--disable-notifications',
+            '--disable-web-security',
+            '--disable-infobars',
+            '--start-fullscreen',
+            '--no-first-run',
+            '--hide-scrollbars',
+            '--disable-extensions'
+        ]
     });
 
     const page = await browser.newPage();
@@ -59,6 +60,18 @@ app.get('/check-url', async (req, res) => {
     }
 
     try {
+                // API
+        // const redirectUrl = await getRedirectUrl(url);
+        // // Sử dụng axios để gọi API geo.ipify.org
+        // const apiKey = 'at_J45NhBuGQSyLmNfrVP5LtLVP2PvoX'; // Thay bằng API key của bạn
+        // const ipifyUrl = `https://geo.ipify.org/api/v2/country?apiKey=${apiKey}&ipAddress=${req.ip}`;
+
+        // const response = await axios.get(ipifyUrl);
+        // const country = response.data.location.country;
+
+        // res.json({ originalUrl: redirectUrl, country });
+
+
         const redirectUrl = await getRedirectUrl(url);
         res.json({ originalUrl: redirectUrl });
     } catch (error) {

@@ -1,10 +1,15 @@
-##URL Redirect Checker
+#URL Redirect Checker
 #Install
 ```cmd
 npm init -y
 npm install express axios
 npm install puppeteer
 ```
+#CMD Check and Delete :3000
+
+    netstat -ano | findstr :3000
+    taskkill /PID <PID> /F
+
 #Install Puppeteer and Puppeteer-core
 ```cmd
 npm install puppeteer puppeteer-core

@@ -14,7 +14,7 @@ async function getRedirectUrl(url) {
 
     const browser = await puppeteer.launch({
         args: [
-            `--proxy-server=${proxy}`,
+            // `--proxy-server=${proxy}`,
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',

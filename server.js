@@ -9,27 +9,40 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Hàm sử dụng Puppeteer để lấy địa chỉ URL đích
 async function getRedirectUrl(url) {
+    // const proxy = 'http://proxy.example.com:8080'; // Địa chỉ proxy và cổng
+
     const browser = await puppeteer.launch({
-    args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--disable-gpu',
-        '--window-size=1920x1080',
-        '--disable-notifications',
-        '--disable-web-security',
-        '--disable-infobars',
-        '--start-fullscreen',
-        '--no-first-run',
-        '--hide-scrollbars',
-        '--disable-extensions',
-        // Thêm cấu hình User-Agent tại đây nếu cần thiết
-    ]
+        // args: [
+        //     `--proxy-server=${proxy}`,
+        //     '--no-sandbox',
+        //     '--disable-setuid-sandbox',
+        //     '--disable-dev-shm-usage',
+        //     '--disable-accelerated-2d-canvas',
+        //     '--disable-gpu',
+        //     '--window-size=1920x1080',
+        //     '--disable-notifications',
+        //     '--disable-web-security',
+        //     '--disable-infobars',
+        //     '--start-fullscreen',
+        //     '--no-first-run',
+        //     '--hide-scrollbars',
+        //     '--disable-extensions'
+        // ]
     });
-    
+
     const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle0' });
+    // await page.authenticate({
+    //     username: 'user123', // Thay bằng tên người dùng của bạn
+    //     password: 'pass123'  // Thay bằng mật khẩu của bạn
+    // });
+
+    try {
+        await page.goto(url, { waitUntil: 'networkidle0', timeout: 60000 }); // Thêm timeout
+    } catch (error) {
+        console.error('Lỗi khi truy cập URL:', error);
+        await browser.close();
+        throw error;
+    }
 
     const finalUrl = page.url();
     await browser.close();

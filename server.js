@@ -62,7 +62,7 @@ app.get('/check-url', async (req, res) => {
     try {
                 // API
         // const redirectUrl = await getRedirectUrl(url);
-        // // Sử dụng axios để gọi API geo.ipify.org
+        // Sử dụng axios để gọi API geo.ipify.org
         // const apiKey = 'at_J45NhBuGQSyLmNfrVP5LtLVP2PvoX'; // Thay bằng API key của bạn
         // const ipifyUrl = `https://geo.ipify.org/api/v2/country?apiKey=${apiKey}&ipAddress=${req.ip}`;
 

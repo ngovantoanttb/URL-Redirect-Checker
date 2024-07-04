@@ -1,4 +1,5 @@
 const express = require('express');
+const chromium = require('chrome-aws-lambda');
 const puppeteer = require('puppeteer');
 const axios = require('axios');
 const path = require('path');
@@ -29,7 +30,10 @@ async function getRedirectUrl(url) {
             '--no-first-run',
             '--hide-scrollbars',
             '--disable-extensions'
-        ]
+        ],
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath,
+        headless: true,
     });
 
     const page = await browser.newPage();

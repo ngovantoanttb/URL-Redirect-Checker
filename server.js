@@ -29,11 +29,13 @@ async function getRedirectUrl(url) {
             '--start-fullscreen',
             '--no-first-run',
             '--hide-scrollbars',
-            '--disable-extensions'
+            '--disable-extensions',
+            'chromium.args'
         ],
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath,
         headless: true,
+        //headless: chromium.headless,
     });
 
     const page = await browser.newPage();

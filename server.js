@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 const axios = require('axios');
 const path = require('path');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000; // Cố định cổng 
 // const port = 3000;
 
 // Cấu hình máy chủ để phục vụ các tệp tĩnh từ thư mục 'public'
@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Hàm sử dụng Puppeteer để lấy địa chỉ URL đích
 async function getRedirectUrl(url) {
-    // const proxy = 'http://proxy.example.com:8080'; // Địa chỉ proxy và cổng
+    // const proxy = 'http://proxy.example.com:8080'; // Địa chỉ proxy và cổng dùng để ẩn ip khi truy cập url check ip
 
     const browser = await puppeteer.launch({
         args: [
@@ -33,9 +33,10 @@ async function getRedirectUrl(url) {
     });
 
     const page = await browser.newPage();
+    //Dùng Proxy 
     // await page.authenticate({
-    //     username: 'user123', // Thay bằng tên người dùng của bạn
-    //     password: 'pass123'  // Thay bằng mật khẩu của bạn
+    //     username: 'user123', // Thay bằng tên người dùng
+    //     password: 'pass123'  // Thay bằng mật khẩu
     // });
 
     try {

@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer');
 const axios = require('axios');
 const path = require('path');
 const app = express();
-const port = process.env.VERCEL_URL; // Cố định cổng 
+const port = process.env.PORT || 3000; // Cố định cổng 
 // const port = 3000;
 
 // Cấu hình máy chủ để phục vụ các tệp tĩnh từ thư mục 'public'
@@ -90,5 +90,5 @@ app.get('/check-url', async (req, res) => {
 
 // Khởi động server
 app.listen(port, () => {
-    console.log(`Server đang chạy tại https://${process.env.VERCEL_URL}`);
+    console.log(`Server đang chạy tại http://localhost:${port}`);
 });
